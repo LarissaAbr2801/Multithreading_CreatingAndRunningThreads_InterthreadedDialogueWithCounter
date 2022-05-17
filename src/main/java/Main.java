@@ -1,15 +1,19 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 
 public class Main {
 
+    static final int taskQuantity = 4;
+
     public static void main(String[] args) throws InterruptedException, ExecutionException {
         final ExecutorService threadPool = Executors
                 .newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
-        List<Callable<Integer>> tasks = List.of(new MyCallable(), new MyCallable(), new MyCallable(),
-                new MyCallable());
-
+        List<Callable<Integer>> tasks = new ArrayList<>();
+        for (int i = 0; i < taskQuantity; i++) {
+            tasks.add(new MyCallable());
+        }
         final List<Future<Integer>> results = threadPool.invokeAll(tasks);
 
         for (Future<Integer> result : results) {
