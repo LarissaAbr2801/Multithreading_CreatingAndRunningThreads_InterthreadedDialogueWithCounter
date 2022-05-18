@@ -4,14 +4,14 @@ import java.util.concurrent.*;
 
 public class Main {
 
-    static final int taskQuantity = 4;
+    static final int TASKS_QUANTITY = 4;
 
     public static void main(String[] args) throws InterruptedException, ExecutionException {
         final ExecutorService threadPool = Executors
                 .newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
         List<Callable<Integer>> tasks = new ArrayList<>();
-        for (int i = 0; i < taskQuantity; i++) {
+        for (int i = 0; i < TASKS_QUANTITY; i++) {
             tasks.add(new MyCallable());
         }
         final List<Future<Integer>> results = threadPool.invokeAll(tasks);
